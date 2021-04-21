@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	"github.com/nartikov/kserver/pkg/hendler"
+	hendler "github.com/nartikov/kserver/pkg/hendler"
 	kser "github.com/nartikov/kserver"
 )
 
