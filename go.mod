@@ -11,6 +11,6 @@ require (
 	github.com/ugorji/go v1.2.5 // indirect
 	github.com/zhashkevych/todo-app v0.0.0-20210124091114-4ffc4325f3c1
 	golang.org/x/crypto v0.0.0-20210415154028-4f45737414dc // indirect
-	golang.org/x/sys v0.0.0-20210420072515-93ed5bcd2bfe // indirect
+	golang.org/x/sys v0.0.0-20210420205809-ac73e9fd8988 // indirect
 	golang.org/x/text v0.3.6 // indirect
 )

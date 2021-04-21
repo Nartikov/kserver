@@ -18,7 +18,6 @@ func (h *Handler) InitRoutes() *gin.Engine{
 	{	
 		listquiz.GET("/:id")
 		listquiz.GET("/:id/*id")
-
-
 	}
+	return router
 }
