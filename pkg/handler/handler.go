@@ -1,23 +1,30 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/nartikov/kserver/pkg/service"
+)
 
 type Handler struct{
+	services *service.Service
+}
 
+func NewHandler(services *service.Service) *Handler{
+	return &Handler{services: services}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine{
 	router:=gin.New()
 	auth := router.Group("/auth")
 	{
-		auth.POST("/sign-up")
-		auth.POST("/sign-in")
+		auth.POST("/sign-up", h.signUp)
+		auth.POST("/sign-in", h.signIn)
 	}
+	/*
 	api:= router.Group("/api")
 		listquiz:=api.Group("/listquizes")
 	{	
-		listquiz.GET("/:id")
-		listquiz.GET("/:id/*id")
-	}
+		listquiz.GET("/:id", h.getAllQuizes)
+	}*/
 	return router
 }
