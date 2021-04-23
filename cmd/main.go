@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	kser "github.com/nartikov/kserver"
 	handler "github.com/nartikov/kserver/pkg/handler"
 	"github.com/nartikov/kserver/pkg/repository"
@@ -12,12 +15,27 @@ import (
 
 func main()  {
 	if err:=initConfig(); err !=nil{
-		log.Fatalf("error init configs: %s", err.Error())
+		panic(fmt.Errorf("error init configs: %s \n", err))
 	}
 
+	if err := godotenv.Load(); err != nil {
+		log.Fatalf("error loading env variables: %s", err.Error())
+	}
 
+	db, err := repository.NewPostgresDB(repository.Config{
+		Host:     viper.GetString("pdb.host"),
+		Port:     viper.GetString("pdb.port"),
+		Username: viper.GetString("pdb.username"),
+		DBName:   viper.GetString("pdb.dbname"),
+		SSLMode:  viper.GetString("pdb.sslmode"),
+		Password: os.Getenv("PDB_PASSWORD"),
+	})
 
-	repos := repository.NewRepository()
+	if err != nil {
+		log.Fatalf("failed to initialize db: %s", err.Error())
+	}
+
+	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 	srv:=new(kser.Server)
@@ -27,6 +45,7 @@ func main()  {
 }
 
 func initConfig() error {
+	viper.SetConfigType("yaml")
 	viper.AddConfigPath("configs")
 	viper.SetConfigName("config")
 	return viper.ReadInConfig()
