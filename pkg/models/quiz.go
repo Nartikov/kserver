@@ -1,4 +1,4 @@
-package kser
+package models
 
 type Quiz struct {
 	Id       int    `json:"-" db:"id"`

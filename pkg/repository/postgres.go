@@ -4,6 +4,12 @@ import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
 )
+// названия таблиц в базе posgresql
+const(
+	usersTable = "users"
+	quizzesTable = "quizzes"
+	usersQuizzes = "users_quizzes"
+)
 
 type Config struct{
 	Host string

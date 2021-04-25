@@ -1,9 +1,12 @@
 package service
 
-import "github.com/nartikov/kserver/pkg/repository"
+import (
+	"github.com/nartikov/kserver/pkg/models"
+	"github.com/nartikov/kserver/pkg/repository"
+)
 
 type Authorization interface {
-
+	CreateUser(user models.User) (int, error)
 }
 
 type Quiz interface {
@@ -26,5 +29,7 @@ type Service struct {
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthService(repos.Authorization),
+	}
 }
