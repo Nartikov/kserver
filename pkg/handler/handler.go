@@ -20,11 +20,23 @@ func (h *Handler) InitRoutes() *gin.Engine{
 		auth.POST("/sign-up", h.signUp)
 		auth.POST("/sign-in", h.signIn)
 	}
-	/*
+	
 	api:= router.Group("/api")
-		listquiz:=api.Group("/listquizes")
-	{	
-		listquiz.GET("/:id", h.getAllQuizes)
-	}*/
+	{
+		quiz:=api.Group("/quiz")
+		{	
+			quiz.GET("/",h.getAllQuizes)
+			quiz.GET("/:id", h.getQuizById)
+			quiz.POST("/",h.createQuiz)
+			quiz.DELETE("/:id", h.deleteQuiz)
+			question:=quiz.Group("/question")
+			{
+				question.GET("/", h.getAllQuestion)
+				question.GET("/:id", h.getQuestionById)
+				question.POST("/", h.createQuestion)
+				question.DELETE("/:id", h.deleteQuestion)
+			}
+		}
+	}
 	return router
 }

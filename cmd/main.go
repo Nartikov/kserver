@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-
+	_ "github.com/lib/pq"
 	"github.com/joho/godotenv"
 	kser "github.com/nartikov/kserver"
 	handler "github.com/nartikov/kserver/pkg/handler"
