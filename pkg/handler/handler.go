@@ -35,6 +35,12 @@ func (h *Handler) InitRoutes() *gin.Engine{
 				question.GET("/:id", h.getQuestionById)
 				question.POST("/", h.createQuestion)
 				question.DELETE("/:id", h.deleteQuestion)
+				answer:=question.Group("answer")
+				{
+					answer.GET("/",h.getAnswersToQuestion)
+					answer.POST("/", h.createAnswersToQuestion)
+					answer.DELETE("/", h.deleteAnswersToQuestion)
+				}
 			}
 		}
 	}
