@@ -7,11 +7,11 @@ import (
 	"github.com/nartikov/kserver/pkg/models"
 )
 
-type AuthPostgres struct{
+type AuthPostgres struct {
 	db *sqlx.DB
 }
 
-func NewAuthPostgres(db *sqlx.DB) *AuthPostgres{
+func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 

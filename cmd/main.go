@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	_ "github.com/lib/pq"
+
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	kser "github.com/nartikov/kserver"
 	handler "github.com/nartikov/kserver/pkg/handler"
 	"github.com/nartikov/kserver/pkg/repository"
@@ -13,8 +14,8 @@ import (
 	"github.com/spf13/viper"
 )
 
-func main()  {
-	if err:=initConfig(); err !=nil{
+func main() {
+	if err := initConfig(); err != nil {
 		panic(fmt.Errorf("error init configs: %s \n", err))
 	}
 
@@ -38,8 +39,8 @@ func main()  {
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
-	srv:=new(kser.Server)
-	if err:=srv.Run(viper.GetString("port"),handlers.InitRoutes()); err!=nil{
+	srv := new(kser.Server)
+	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
 		log.Fatalf("run error: %s", err.Error())
 	}
 }

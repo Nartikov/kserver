@@ -10,11 +10,11 @@ import (
 
 const salt = "sdjhfyvyveps4nm34"
 
-type AuthService struct{
+type AuthService struct {
 	repo repository.Authorization
 }
 
-func NewAuthService(repo repository.Authorization) *AuthService{
+func NewAuthService(repo repository.Authorization) *AuthService {
 	return &AuthService{repo: repo}
 }
 

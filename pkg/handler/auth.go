@@ -3,12 +3,13 @@ package handler
 import (
 	"fmt"
 
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/nartikov/kserver/pkg/models"
-	"net/http"
 )
 
-func (h *Handler) signUp(c *gin.Context){
+func (h *Handler) signUp(c *gin.Context) {
 	var input models.User
 
 	if err := c.BindJSON(&input); err != nil {
@@ -29,6 +30,6 @@ func (h *Handler) signUp(c *gin.Context){
 	fmt.Println("Create new user")
 }
 
-func (h *Handler) signIn(c *gin.Context){
+func (h *Handler) signIn(c *gin.Context) {
 	fmt.Println("start signIn")
 }

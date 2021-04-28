@@ -10,15 +10,12 @@ type Authorization interface {
 }
 
 type Quiz interface {
-	
 }
 
 type Question interface {
-	
 }
 
 type Answer interface {
-	
 }
 
 type Repository struct {
