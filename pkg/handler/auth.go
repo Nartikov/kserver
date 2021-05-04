@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"fmt"
-
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -41,13 +39,13 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
-	id, err := h.services.Authorization.GenerateToken(input.Username, input.Password)
+	token, err := h.services.Authorization.GenerateToken(input.Username, input.Password)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+		"token": token,
 	})
 }
