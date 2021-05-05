@@ -12,6 +12,7 @@ type Authorization interface {
 }
 
 type Quiz interface {
+	Create(userId int, quiz models.Quiz) (int error)
 }
 
 type Question interface {

@@ -4,13 +4,20 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nartikov/kserver/pkg/models"
 )
 
 func (h *Handler) createQuiz(c *gin.Context) {
-	id, _ := c.Get(userCtx)
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id":id,
-	})
+	id, ok := c.Get(userCtx)
+	if !ok{
+		newErrorResponse(c, http.StatusInternalServerError, "user id not fund")
+	}
+	var input models.Quiz
+	if err:= c.BindJSON(&input); err!=nil{
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	//call metod services
 }
 
 func (h *Handler) getAllQuizes(c *gin.Context) {
