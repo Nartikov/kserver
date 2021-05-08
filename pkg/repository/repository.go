@@ -11,7 +11,7 @@ type Authorization interface {
 }
 
 type Quiz interface {
-	Create(userId int, quiz models.Quiz)(int, error)
+	Create(userId int, quiz models.Quiz) (int, error)
 }
 
 type Question interface {
@@ -30,5 +30,6 @@ type Repository struct {
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
+		Quiz:          NewQuizPostgres(db),
 	}
 }

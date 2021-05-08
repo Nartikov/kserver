@@ -8,16 +8,23 @@ import (
 )
 
 func (h *Handler) createQuiz(c *gin.Context) {
-	id, ok := c.Get(userCtx)
-	if !ok{
+	userId, err := getUserId(c)
+	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, "user id not fund")
 	}
 	var input models.Quiz
-	if err:= c.BindJSON(&input); err!=nil{
+	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	//call metod services
+	id, err := h.services.Quiz.Create(userId, input)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }
 
 func (h *Handler) getAllQuizes(c *gin.Context) {

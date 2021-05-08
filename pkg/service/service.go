@@ -12,7 +12,7 @@ type Authorization interface {
 }
 
 type Quiz interface {
-	Create(userId int, quiz models.Quiz) (int error)
+	Create(userId int, quiz models.Quiz) (int, error)
 }
 
 type Question interface {
@@ -31,6 +31,6 @@ type Service struct {
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
-		Quiz: NewQuizService(repos.Quiz),
+		Quiz:          NewQuizService(repos.Quiz),
 	}
 }

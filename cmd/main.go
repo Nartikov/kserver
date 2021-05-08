@@ -16,7 +16,7 @@ import (
 
 func main() {
 	if err := initConfig(); err != nil {
-		panic(fmt.Errorf("error init configs: %s \n", err))
+		panic(fmt.Errorf("error init configs: %s ", err))
 	}
 
 	if err := godotenv.Load(); err != nil {
